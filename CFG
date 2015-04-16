@@ -1,0 +1,30 @@
+0 S1:S
+1 S:DECLARE OTHER
+2 DECLARE:TYPE VARS ;
+3 DECLARE:TYPE var [ Int ] ;
+4 VARS:var , VARS
+5 VARS:var
+6 TYPE:char
+7 TYPE:int
+8 TYPE:double
+9 TYPE:float
+10 EVL:LEFT = RIGHT
+11 LEFT:var
+12 LEFT:var [ Int ]
+13 RIGHT:var
+14 RIGHT:Int
+15 RIGHT:Float
+16 RIGHT:string
+17 RIGHT:COUNT
+47 RIGHT:char
+48 RIGHT:var [ Int ]
+18 ACTOR:var
+19 ACTOR:Float
+20 ACTOR:Int
+21 ACTOR:var [ Int ]
+22 COUNT:T + COUNT
+50 COUNT:T - COUNT
+23 T:T * T
+51 T:T / T
+52 T:( COUNT )
+24 T:ACTOR
