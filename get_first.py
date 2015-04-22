@@ -54,6 +54,7 @@ def one_first(cfgs):
             if ifT(body) == 0 or ifT(body) == 1:
                 first[body] = [body]
     
+    first['#'] = ['#']
     for var in vars_list:#4,5
         fs = []
         var_cfg = []
@@ -103,27 +104,3 @@ def one_first(cfgs):
                     if tmp:
                         ifchange = tmp
     return first
-
-
-
-    
-
-
-
-         
-
-
-
-
-       
-
-
-
-
-
-
-
-
-
-
-
