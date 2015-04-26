@@ -1,4 +1,3 @@
-import pdb
 def top(ls):
     return ls[len(ls)-1]
 
@@ -25,7 +24,7 @@ def analyze(action,goto,cfgs):
     #    pdb.set_trace()
         s = top(numbers_stack)
         a = string_buffer[ip]
-        s_r = None  
+        s_r = None
 
         try:
             s_r = action[s][a]
@@ -46,7 +45,6 @@ def analyze(action,goto,cfgs):
             numbers_stack.append(num)
             symbols_stack.append(a)
             ip += 1
-        
         elif s_r[0] == 'r':
             cfg_id = -1
             try:
@@ -59,7 +57,6 @@ def analyze(action,goto,cfgs):
             for cfg in cfgs:
                 if int(cfg['id']) == cfg_id:
                     current_cfg = cfg
-            
             if current_cfg is None:
                 print 'can\'t find cfg'
                 return
@@ -87,41 +84,4 @@ def analyze(action,goto,cfgs):
         else:
             print 'error'
             return
-
-                
-
-
-
-        
-
-    
-    
-
-
-
-                
-       
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

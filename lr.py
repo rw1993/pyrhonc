@@ -81,7 +81,7 @@ def get_closure(closure,cfgs):#i=[{s:.s1,#}] cfgs is cfgs
             lenth = len(closure)
     return closure
 
-    
+
 def build_lr1_set(cfgs):
     i = []
     for e in cfgs:#s1:.s,#
@@ -133,8 +133,18 @@ def build_table(c,cfgs):
                     g = go(i,a,cfgs)
                     if g in c:
                         j = c.index(g)
+                        tmp = 's'+str(j)
+                        try:
+                            if tmp != action[index][a]:
+                                print 'error'
+                                exit(0)
+                            else:
+                                pass
+                        except:
+                            pass
+
                         action[index][a] = 's'+str(j)
-        
+
         var_list = get_var(cfgs)
         for var in var_list:#2
             g = go(i,var,cfgs)
@@ -148,7 +158,6 @@ def build_table(c,cfgs):
             lookahead = s['lookahead']
             if sindex == len(cfg['cfg_bodys']):
                 j = cfg['id']
-                '''
                 tmp = 'r' +str(j)
                 try:
                    tmp1 = action[index][lookahead]
@@ -157,7 +166,6 @@ def build_table(c,cfgs):
                        exit(0)
                 except:
                     pass
-                '''
                 action[index][lookahead] = 'r'+str(j)
         s = {}
         for e in cfgs:
