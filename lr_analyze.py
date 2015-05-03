@@ -1,3 +1,4 @@
+from lr_tree import lr_nodes
 def top(ls):
     return ls[len(ls)-1]
 
@@ -10,22 +11,22 @@ def analyze(action,goto,cfgs):
 
     numbers_stack.append(0)
     symbols_stack.append('#')
-
-    with open('test_result','r') as f:#read lex result
+    with open('my_result','r') as f:#read lex result
+    #with open('test_result','r') as f:#read lex result
         for line in f.readlines():
             line = line.replace('\n','')
             ls = line.split(',')
-            string_buffer.append(ls[0])
-
-    string_buffer.append('#')
+            string_buffer.append(ls)
+    string_buffer.append(['#','#'])
     #print string_buffer
     ip = 0
     while True:
-    #    pdb.set_trace()
         s = top(numbers_stack)
-        a = string_buffer[ip]
+        a = string_buffer[ip][0]
+        value = string_buffer[ip][1]
         s_r = None
-
+        print 'a',a
+        print 's',s
         try:
             s_r = action[s][a]
         except:
@@ -52,7 +53,6 @@ def analyze(action,goto,cfgs):
             except:
                 print 'former error'
                 return
-
             current_cfg = None
             for cfg in cfgs:
                 if int(cfg['id']) == cfg_id:
@@ -60,12 +60,10 @@ def analyze(action,goto,cfgs):
             if current_cfg is None:
                 print 'can\'t find cfg'
                 return
-
             beta = len(current_cfg['cfg_bodys'])
             for i in range(beta):
                 numbers_stack.pop()
                 symbols_stack.pop()
-
             symbols_stack.append(current_cfg['cfg_head'])
             s1 = top(numbers_stack)
             new_number = -1
@@ -75,13 +73,10 @@ def analyze(action,goto,cfgs):
                 print 'r error'
                 return
             numbers_stack.append(new_number)
-            print 'cfg_id',current_cfg['id'],'symbols_stack',symbols_stack
-
+            print 'cfg_head and body',current_cfg['cfg_head'],current_cfg['cfg_bodys'],'symbols_stack',symbols_stack
         elif s_r == 'acc':
             print 'done'
             return
-
         else:
             print 'error'
             return
-

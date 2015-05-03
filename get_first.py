@@ -48,12 +48,10 @@ def one_first(cfgs):
     vars_list = []
     for cfg in cfgs:#get every var
         union(vars_list,cfg['cfg_head'])
-    
     for cfg in cfgs:#get every T
         for body in cfg['cfg_bodys']:
             if ifT(body) == 0 or ifT(body) == 1:
                 first[body] = [body]
-    
     first['#'] = ['#']
     for var in vars_list:#4,5
         fs = []
@@ -67,7 +65,7 @@ def one_first(cfgs):
             if ifT(f) == 1 or ifT(f) == 0:
                 union(fs,f)
         first[var] = fs
-    
+
     ifchange = True
     while ifchange:
         ifchange = False

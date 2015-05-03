@@ -5,8 +5,8 @@ import pickle
 
 
 class Lex:
-    
-   
+
+
     def __init__(self):
         self.keywords = []
         self.symbols = []
@@ -15,7 +15,7 @@ class Lex:
         self.names = {}
         self.get_words_symbols('keywords',self.keywords)
         self.get_words_symbols('symbols',self.symbols)
-    
+
     def get_words_symbols(self,url,ls):
         with open(url,'r') as f:
             if url == 'symbols':
@@ -24,14 +24,14 @@ class Lex:
                 for s in strings:
                     ls.append(s)
                 return
-            
+
             raw_string = f.readline()
             raw_string = raw_string.replace('"','')
             string = raw_string.replace('\n','')
             strings = string.split(',')
             for keyword in strings:
                 ls.append(keyword)
-    
+
     def delete_note(self,strings):
         pattern1 = r'//.*\n'
         sub_string = re.sub(pattern1,' ',strings)
@@ -39,7 +39,7 @@ class Lex:
         p = re.compile(pattern2,re.S)
         sub_string = re.sub(p," ",sub_string)
         return sub_string
-    
+
     def DFA(self,string,result):
         self.build_bianma()
         state = 'state0'
@@ -95,7 +95,7 @@ class Lex:
                     tmp = ''
                     string = string[1:]
 
-            
+
             else:
                 if state == 'state0':
                     if string[0] in self.symbols:#handle symbols
@@ -189,12 +189,12 @@ class Lex:
                 elif state == 'sharp':
                     tmp += string[0]
                     string = string[1:]
-        
-        with open('result2','w') as f:
+
+        with open('my_result','w') as f:
             for re in result:
                 f.write(str(re[0])+','+str(re[1]))
                 f.write('\n')
-        
+
         with open('names','wb') as f:
             pickle.dump(self.names,f)
 
@@ -209,7 +209,7 @@ class Lex:
         for keyword in self.keywords:
             self.bianma[keyword] = i
             i += 1
-    
+
     def analyze(self,url):
         result = []
         with open(url,'r') as f:
@@ -218,14 +218,14 @@ class Lex:
                 strings += string
             strings = self.delete_note(strings)#delete the note
             self.DFA(strings,result)
-       
-        
-                        
+
+
+
 
 
 if __name__ == '__main__':
     l = Lex()
-    l.analyze('test.c')
+    l.analyze('my_test')
     '''
     print l.reg('int')
     print l.reg('int_123')
@@ -236,4 +236,4 @@ if __name__ == '__main__':
     print l.reg("'ab'")
     print l.reg('"what?int,123"')
     '''
-   
+

@@ -15,7 +15,6 @@ def get_cfg(url):
     '''
 
     with open(url,'r') as f:
-
         for line in f.readlines():
             string = line.replace('\n',"")
             strings = string.split(':')
@@ -28,7 +27,6 @@ def get_cfg(url):
             e['cfg_head'] = cfg_head
             e['cfg_bodys'] = bodys
             cfgs.append(e)
-
         return cfgs
 
 def get_B(element):
@@ -197,7 +195,7 @@ def go(i,var,cfgs):
     j = []
     for s in i:
         if var in s['e']['cfg_bodys']:
-            if s['e']['cfg_bodys'].index(var) == s['index'] and s['e']['cfg_bodys'] != '#':
+            if s['e']['cfg_bodys'].index(var) == s['index'] and s['e']['cfg_bodys'] != ['#']:
                 ifadd = True
                 news = {}
                 news['lookahead'] = s['lookahead']
@@ -212,5 +210,6 @@ def go(i,var,cfgs):
     return get_closure(j,cfgs)
 
 if __name__ == '__main__':
-    build_lr1('test_cfg')
+    #build_lr1('test_cfg')
+    build_lr1('CFG_NUM')
 

@@ -1,6 +1,11 @@
-1 s1:s
-2 s:l 0 r
-3 s:r
-4 l:3 r
-5 l:54
-6 r:l
+s0:p
+p:d s
+d:declare d
+d:declare
+declare:type var 16
+type:20
+type:22
+type:24
+var:54
+var:54 10 50 11
+s:16
